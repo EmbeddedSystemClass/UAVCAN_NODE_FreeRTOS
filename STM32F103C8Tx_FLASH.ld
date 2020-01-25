@@ -41,8 +41,8 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
-RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 20K
-FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 64K
+RAM (xrw)      : ORIGIN = 0x20000100, LENGTH = 20224
+FLASH (rx)      : ORIGIN = 0x8006400, LENGTH = 39K
 }
 
 /* Define output sections */
@@ -57,9 +57,11 @@ SECTIONS
   } >FLASH
 
   /* The program code and other data goes into FLASH */
-  .text :
+  .text : ALIGN(4) SUBALIGN(4)
   {
-    . = ALIGN(4);
+    /* we want app_descriptor near the start of flash so a false
+       positive isn't found by the bootloader (eg. ROMFS) */
+    KEEP(*(.app_descriptor));
     *(.text)           /* .text sections (code) */
     *(.text*)          /* .text* sections (code) */
     *(.glue_7)         /* glue arm to thumb code */

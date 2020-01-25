@@ -54,6 +54,7 @@
 #include "usart.h"
 #include "gpio.h"
 #include "uavcan.h"
+#include "app_comms.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -63,6 +64,44 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+const struct app_descriptor app_descriptor __attribute__((section(".app_descriptor"))) = {
+  { 0x40, 0xa2, 0xe4, 0xf1, 0x64, 0x68, 0x91, 0x06 },   // uint8_t sig[8]
+  0x1234,     //  uint32_t image_crc1 is the crc32 from firmware start to start of image_crc1
+  0xabcd,     //  uint32_t image_crc2 is the crc32 from the start of version_major to the end of the firmware
+  0x0000,     //  uint32_t image_size total size of firmware image in bytes
+  0x0000,     //  uint32_t git hash
+  1,          //  uint8_t  software version MAJOR
+  0,          //  uint8_t  software version MINOR
+  138,        //  uint16_t board_id = APJ_BOARD_ID
+  { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff },   // uint8_t reserved[8]
+};
+
+
+/*
+ the app_descriptor stored in flash in the main firmware and is used
+ by the bootloader to confirm that the firmware is not corrupt and is
+ suitable for this board. The build dependent values in this structure
+ are filled in by set_app_descriptor() in the waf build
+ * /
+struct app_descriptor {
+    uint8_t sig[8] = { 0x40, 0xa2, 0xe4, 0xf1, 0x64, 0x68, 0x91, 0x06 };
+    // crc1 is the crc32 from firmware start to start of image_crc1
+    uint32_t image_crc1 = 0;
+    // crc2 is the crc32 from the start of version_major to the end of the firmware
+    uint32_t image_crc2 = 0;
+    // total size of firmware image in bytes
+    uint32_t image_size = 0;
+    uint32_t git_hash = 0;
+    // software version number
+    uint8_t  version_major = FW_MAJOR;
+    uint8_t version_minor = FW_MINOR;
+    // APJ_BOARD_ID (hardware version). This is also used in CAN NodeInfo
+    // with high byte in HardwareVersion.major and low byte in HardwareVersion.minor
+    uint16_t  board_id = APJ_BOARD_ID;
+    uint8_t reserved[8] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+};
+*/
+
 
 /* USER CODE END PV */
 
