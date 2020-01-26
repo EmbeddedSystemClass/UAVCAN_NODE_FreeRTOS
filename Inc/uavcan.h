@@ -61,6 +61,8 @@ int64_t defval;
 
 void showRcpwmonUart(void);
 
+void uavcanInit(void);
+
 void sendCanard(void);
 
 void receiveCanard(void);
@@ -79,6 +81,9 @@ void getNodeInfoHandleCanard(CanardRxTransfer* transfer);
 
 uint16_t makeNodeInfoMessage(uint8_t buffer[UAVCAN_GET_NODE_INFO_RESPONSE_MAX_SIZE]);
 
+void makeNodeStatusMessage(uint8_t buffer[UAVCAN_NODE_STATUS_MESSAGE_SIZE]);
+
+void readUniqueID(uint8_t* out_uid);
 
 
 static const uint8_t  sine_wave[256] = 

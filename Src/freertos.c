@@ -52,8 +52,12 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "main.h"
+#include "uavcan.h"
 #include "cmsis_os.h"
 #include "stm32f1xx_hal.h"
+
+extern void stm32_watchdog_pat(void);
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */     
@@ -146,10 +150,13 @@ void StartTask01(void const * argument)
   /* Infinite loop */
   while(1)
   {
-    //HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_12);
+    HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
    // HAL_UART_Transmit(&huart1,"go",2,0xffff);
     showRcpwmonUart();
-    osDelay(100);
+
+    stm32_watchdog_pat();
+    
+    osDelay(200);
   }
   /* USER CODE END StartTask01 */
 }

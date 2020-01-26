@@ -213,6 +213,10 @@ clean:
 stlink:
 	make
 	st-flash --reset write $(BUILD_DIR)/$(TARGET).bin 0x8000000 
+
+app:
+	python Tools/waf_magic.py
+
 #######################################
 # dependencies
 #######################################
