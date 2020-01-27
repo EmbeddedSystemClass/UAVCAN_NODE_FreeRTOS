@@ -156,7 +156,7 @@ void StartTask01(void const * argument)
 
     stm32_watchdog_pat();
     
-    osDelay(200);
+    osDelay(500);
   }
   /* USER CODE END StartTask01 */
 }

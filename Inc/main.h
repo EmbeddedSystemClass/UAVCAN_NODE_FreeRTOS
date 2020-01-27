@@ -55,7 +55,7 @@
 /* USER CODE BEGIN Includes */
 #define FW_MAJOR 1
 #define FW_MINOR 0
-#define APJ_BOARD_ID 1004
+#define APJ_BOARD_ID 1000
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/

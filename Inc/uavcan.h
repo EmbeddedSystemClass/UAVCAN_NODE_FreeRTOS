@@ -9,7 +9,7 @@
 
 #define APP_VERSION_MAJOR                                           99
 #define APP_VERSION_MINOR                                           99
-#define APP_NODE_NAME                                               "skyyu.node.demo"
+#define APP_NODE_NAME                                               "mgeo.node.demo"
 #define GIT_HASH                                                    0xBADC0FFE
 
 #define UAVCAN_GET_NODE_INFO_DATA_TYPE_SIGNATURE                    0xee468a8121c46a9e
